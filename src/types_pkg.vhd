@@ -1,11 +1,12 @@
 /*! @file types_pkg.vhd
  *  @brief Package containing types and constants used throughout the processor
+ *  @author Maxwell Johnson
  */
 
 library ieee;
 use ieee.std_logic_1164.all;
 
-package types_pkg is
+package types is
 
   /*! Generic address size in bits */
   constant addr_bits : integer := 32;
@@ -25,6 +26,13 @@ package types_pkg is
   type mem32_response is record
     rddata : std_logic_vector(31 downto 0); /*! Read data */
     /*! @todo Will eventually include error information */
+  end record;
+
+  /*! Result of the decoder */
+  type decode_t is record
+    /*! Instruction length, in bytes
+     *  @todo should we use integer range? */
+    i_len : std_logic_vector(3 downto 0);
   end record;
 
 end package;
