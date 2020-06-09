@@ -5,6 +5,7 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 library work;
 use work.types;
@@ -14,26 +15,26 @@ entity ia32 is
 end entity;
 
 architecture arch of ia32 is
-  signal i_addr     : std_logic_vector(types.addr_bits-1 downto 0);
+  signal i_addr     : unsigned(types.addr_bits-1 downto 0);
   signal i_re       : std_logic;
-  signal i_rddata   : std_logic_vector(types.i_data_bits-1 downto 0);
+  signal i_rddata   : unsigned(types.i_data_bits-1 downto 0);
   signal d_request  : types.mem32_request;
   signal d_response : types.mem32_response;
 
   component memory_interface is
     port (clk, rst_n : in  std_logic;
-          i_addr     : out std_logic_vector(types.addr_bits-1 downto 0);
+          i_addr     : out unsigned(types.addr_bits-1 downto 0);
           i_re       : out std_logic;
-          i_rddata   : in  std_logic_vector(types.i_data_bits-1 downto 0);
+          i_rddata   : in  unsigned(types.i_data_bits-1 downto 0);
           d_request  : in  types.mem32_request;
           d_response : out types.mem32_response);
   end component;
 
   component cpu_core is
     port (clk, rst_n : in  std_logic;
-          i_addr     : in  std_logic_vector(types.addr_bits-1 downto 0);
+          i_addr     : in  unsigned(types.addr_bits-1 downto 0);
           i_re       : in  std_logic;
-          i_rddata   : out std_logic_vector(types.i_data_bits-1 downto 0);
+          i_rddata   : out unsigned(types.i_data_bits-1 downto 0);
           d_request  : out types.mem32_request;
           d_response : in  types.mem32_response);
   end component;

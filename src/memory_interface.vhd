@@ -5,6 +5,7 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 library work;
 use work.types;
@@ -17,11 +18,11 @@ use work.types;
 entity memory_interface is
   port (clk, rst_n : in  std_logic;
         /*! Instruction memory address */
-        i_addr     : out std_logic_vector(types.addr_bits-1 downto 0);
+        i_addr     : out unsigned(types.addr_bits-1 downto 0);
         /*! I-mem read enable */
         i_re       : out std_logic;
         /*! I-mem read data */
-        i_rddata   : in  std_logic_vector(types.i_data_bits-1 downto 0);
+        i_rddata   : in  unsigned(types.i_data_bits-1 downto 0);
 
         /*! Data memory request */
         d_request  : in  types.mem32_request;

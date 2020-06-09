@@ -5,6 +5,7 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 package types is
 
@@ -16,15 +17,15 @@ package types is
 
   /*! Type of a 32-bit read/write memory request */
   type mem32_request is record
-    addr   : std_logic_vector(addr_bits downto 0); /*! Address */
+    addr   : unsigned(addr_bits downto 0); /*! Address */
     re     : std_logic;                            /*! Read enable */
     we     : std_logic;                            /*! Write enable */
-    wrdata : std_logic_vector(31 downto 0);        /*! Write data */
+    wrdata : unsigned(31 downto 0);        /*! Write data */
   end record;
 
   /*! Type of a 32-bit read/write memory response */
   type mem32_response is record
-    rddata : std_logic_vector(31 downto 0); /*! Read data */
+    rddata : unsigned(31 downto 0); /*! Read data */
     /*! @todo Will eventually include error information */
   end record;
 
@@ -32,7 +33,15 @@ package types is
   type decode_t is record
     /*! Instruction length, in bytes
      *  @todo should we use integer range? */
-    i_len : std_logic_vector(3 downto 0);
+    i_len : unsigned(3 downto 0);
+    /*! @todo */
   end record;
+
+  /*! Register identifier, for all registers. Used primarily by register file
+   *  and decode. */
+  type reg_id_t is (REG_EAX); /*! @todo */
+
+  /*! ALU operation */
+  type alu_op_t is (ALU_ADD); /*! @todo */
 
 end package;

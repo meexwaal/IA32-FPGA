@@ -5,6 +5,7 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 library work;
 use work.types;
@@ -15,21 +16,21 @@ entity decode is
     /*! Instruction memory to decode.
      *  imem(0) is the byte from the lowest address.
      */
-    imem    : in std_logic_vector(types.i_data_bits-1 downto 0);
+    imem    : in unsigned(types.i_data_bits-1 downto 0);
     /*! Decoded control signals etc. */
     decoded : out types.decode_t);
 end entity;
 
 architecture arch of decode is
   /* Opcode and variants that use some of the higher bits */
-  signal op5b : std_logic_vector(4 downto 0);
-  signal op6b : std_logic_vector(5 downto 0);
-  signal op7b : std_logic_vector(6 downto 0);
-  signal op   : std_logic_vector(7 downto 0);
+  signal op5b : unsigned(4 downto 0);
+  signal op6b : unsigned(5 downto 0);
+  signal op7b : unsigned(6 downto 0);
+  signal op   : unsigned(7 downto 0);
 begin
   /* TODO */
   /* Instruction memory format */
-  /* type imem_t is array(0 to 15) of std_logic_vector(7 downto 0); */
+  /* type imem_t is array(0 to 15) of unsigned(7 downto 0); */
   op <= imem(types.i_data_bits-1 downto types.i_data_bits-8);
 
   op5b <= op(7 downto 3);
